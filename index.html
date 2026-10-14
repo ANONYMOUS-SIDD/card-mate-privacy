@@ -465,16 +465,20 @@
     z-index: 1;
   }
 
+  /* Email button — the anchor now shrinks its padding, icon, and font
+     size fluidly as the viewport narrows. The email text is forced to a
+     single line (white-space: nowrap) and the font scales down instead
+     of wrapping to a second row. */
   .contact-card a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: clamp(6px, 1.6vw, 10px);
     max-width: 100%;
     background: rgba(255, 255, 255, 0.98);
     color: var(--primary-dark);
     text-decoration: none;
-    padding: 14px 22px;
+    padding: 14px clamp(10px, 2.6vw, 22px);
     border-radius: 12px;
     font-weight: 800;
     font-size: 14.5px;
@@ -491,19 +495,19 @@
   }
 
   .contact-card a svg {
-    width: 17px;
-    height: 17px;
+    width: clamp(12px, 3.8vw, 17px);
+    height: clamp(12px, 3.8vw, 17px);
     flex-shrink: 0;
   }
 
-  /* The email text is wrapped in this span so it can shrink gracefully
-     on narrow screens without breaking the icon alignment. */
+  /* Email text — one line, always. Font size scales down smoothly
+     between 9.5px (on a 280px foldable) and 14.5px (on desktop). */
   .contact-card a span {
     display: block;
-    min-width: 0;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    line-height: 1.35;
+    white-space: nowrap;
+    font-size: clamp(9.5px, 3.4vw, 14.5px);
+    letter-spacing: clamp(0px, 0.05vw, 0.2px);
+    line-height: 1.2;
   }
 
   footer {
@@ -546,25 +550,6 @@
     .contact-card h3 { font-size: 18px; }
     .permission-row { padding: 18px 16px; grid-template-columns: 44px 1fr; gap: 14px; }
     .permission-icon { width: 44px; height: 44px; border-radius: 12px; }
-  }
-
-  /* Smallest phones — shrink the email button and allow the address to
-     wrap to a second line if needed without overflowing. */
-  @media (max-width: 420px) {
-    .contact-card a {
-      padding: 12px 14px;
-      font-size: 12.5px;
-      gap: 8px;
-      width: 100%;
-    }
-    .contact-card a svg {
-      width: 15px;
-      height: 15px;
-    }
-    .contact-card a span {
-      font-size: 12px;
-      letter-spacing: 0;
-    }
   }
 </style>
 </head>
